@@ -1,6 +1,8 @@
 package fudan.pm.fudanCompass.entity;
 
+import fudan.pm.fudanCompass.dto.request.RatingRequest;
 import lombok.Data;
+import org.springframework.util.ObjectUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,7 +23,6 @@ public class Rating {
     private String content;
 
     private Long likeNum = 0L;
-    private Boolean favoured = false;
     private LocalDateTime createTime = LocalDateTime.now();
     private LocalDateTime updateTime = LocalDateTime.now();
 
@@ -34,5 +35,20 @@ public class Rating {
     @JoinTable(name = "rating_comment",
             joinColumns = {@JoinColumn(name = "rating_id")}, inverseJoinColumns = {@JoinColumn(name = "comment_id")})
     private List<Comment> comments;
+
+    public void update(RatingRequest request){
+        if (!ObjectUtils.isEmpty(request.getCourseName()))
+            courseName = request.getCourseName();
+        if (!ObjectUtils.isEmpty(request.getCourseType()))
+            courseType = request.getCourseType();
+        if (!ObjectUtils.isEmpty(request.getRelatedMajor()))
+            relatedMajor = request.getRelatedMajor();
+        if (!ObjectUtils.isEmpty(request.getScore()))
+            score = request.getScore();
+        if (!ObjectUtils.isEmpty(request.getTitle()))
+            title = request.getTitle();
+        if (!ObjectUtils.isEmpty(request.getContent()))
+            content = request.getContent();
+    }
 
 }

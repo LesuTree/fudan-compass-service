@@ -16,5 +16,18 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    private String major;
+
+    //标识符进行区分，天数之间为*，课程之间为#
+    private String courseTable=" & & & & & & ";
+    public User(String username, String password,String major) {
+        this.username = username;
+        this.password = password;
+        this.major = major;
+    }
+
+    public User() {
+
+    }
 
 }
